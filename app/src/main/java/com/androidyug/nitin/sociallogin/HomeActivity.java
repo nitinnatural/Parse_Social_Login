@@ -7,18 +7,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
 
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
-
+    private Button mPushButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mPushButton = (Button) findViewById(R.id.btnPush);
+        mPushButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseQuery pushQuery = ParseInstallation.getQuery();
+                pushQuery.whereEqualTo("deviceType", "android");
+                ParsePush push = new ParsePush();
+                push.setQuery(pushQuery);
+                push.setMessage("You have a push notification");
+                push.sendInBackground();
+            }
+        });
+
 
 
     }

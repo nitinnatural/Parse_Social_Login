@@ -25,6 +25,7 @@ import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseInstallation;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
@@ -45,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         //FacebookSdk.sdkInitialize(getApplicationContext());
 
         //Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "jLrlfXlaKpqB4qbl25EzPqVquPti7EuY334HFecB", "hdcnw67K9pensgJCqzVdzhppE0ZcPXVuIMjPXA1K");
+         //Parse.initialize(this, "jLrlfXlaKpqB4qbl25EzPqVquPti7EuY334HFecB", "hdcnw67K9pensgJCqzVdzhppE0ZcPXVuIMjPXA1K");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseFacebookUtils.initialize(this);
         ParseTwitterUtils.initialize("ftrB4BYqfT0LjuwIxkEVvrXeN", "EzKP1FOI1vVXtr34dNHQiV9rv1efm6IIcuupNHVWG8fYD6fpGN");
 
 
 
-        setContentView(R.layout.activity_main);
-
-
+        // initilize the views
         mFbLogInBtn = (Button) findViewById(R.id.fb_login_button);
         mTwitterLoginBtn = (Button) findViewById(R.id.twitter_login_button);
 
